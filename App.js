@@ -1,8 +1,13 @@
 import React from 'react';
 import MyCustomDrawer from './src/screens/MyCustomDrawer';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   return (
-    <MyCustomDrawer />
+    <>
+      <StatusBar backgroundColor="#fff" />
+      <MyCustomDrawer />
+      
+    </>
   );
 }

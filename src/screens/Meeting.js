@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Image, StatusBar, ScrollView, TouchableOpacity, Alert, ToastAndroid, ImageBackground } from 'react-native';
 import { Title, Input, Item, Body, Label, Icon, Spinner } from 'native-base';
 import MyIcon from 'react-native-vector-icons/FontAwesome';
+import AddMeeting from './AddMeeting';
 
 class Meeting extends Component {
 
@@ -23,22 +24,11 @@ class Meeting extends Component {
         });
         console.log('Clicked');
     }
-    loggedIn = () => {
-
-        const { email, password } = this.state;
-        if (email == "") {
-            Alert.alert('Error', 'Please Enter Your Email',);
-        } else if (password == "") {
-            Alert.alert('Error', 'Please Enter Your Password',);
-        }
-        else {
-            if (password.length <= 8) {
-                Alert.alert('Error', 'Weak Password');
-            }
-            else {
-            }
-        }
+    gotoAddNewMeeting = () => {
+        console.log('Clicked');
+        console.log(this.props.navigation.navigate('AddMeeting'));
     }
+  
 
 
     render() {
@@ -56,7 +46,7 @@ class Meeting extends Component {
                     <View style={styles.loginBody}>
                         <Text style={styles.bodyTitle}> WELCOME TO AVS</Text>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('AddMeeting')} style={styles.myMeeting}>
+                        <TouchableOpacity onPress={() => this.gotoAddNewMeeting()} style={styles.myMeeting}>
                             <Text style={styles.myMeetingText}>Add New Meeting</Text>
                         </TouchableOpacity>
 

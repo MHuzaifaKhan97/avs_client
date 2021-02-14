@@ -21,6 +21,7 @@ import {
     Text,
     Thumbnail
 } from "native-base";
+import { StatusBar } from 'react-native';
 import Animated from "react-native-reanimated";
 import { DrawerActions } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -30,11 +31,15 @@ function SideBar({ progress, ...props }) {
         inputRange: [0, 1],
         outputRange: [-100, 0]
     });
+
     return (
         <Container>
+            <StatusBar backgroundColor="#fff" />
             <Header style={{ backgroundColor: '#fff' }}>
                 <Right>
-                    <TouchableOpacity style={{backgroundColor:'#fff'}} onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}>
+                    <TouchableOpacity style={{backgroundColor:'#fff'}} onPress={() => 
+                    props.navigation.dispatch(DrawerActions.closeDrawer())
+                    }>
                         <Icon name="menu" color={'#46a0b3'} />
                     </TouchableOpacity>
                 </Right>
@@ -55,27 +60,15 @@ function SideBar({ progress, ...props }) {
                     <Animated.View style={{ transform: [{ translateX }] }}>
                         <DrawerItemList {...props} />
                         <DrawerItem
-
                             label="Log Out"
                             icon={({ color, size }) => (
-                                <Icon name="home" style={{ fontSize: size, color: color }} />
+                                <Icon type="FontAwesome" name="sign-out" style={{ fontSize: size, color: color }} />
                             )}
-                            onPress={() => props.navigation.navigate('Home')}
+                            onPress={() => props.navigation.navigate('Login')}
                         />
                     </Animated.View>
                 </DrawerContentScrollView>
-                {/* <List>
-                    <ListItem>
-                        <Body>
-                            <Text>Dark Mode</Text>
-                        </Body>
-                        <Right>
-                            <Switch value={true} />
-                        </Right>
-                    </ListItem>
-                </List> */}
-            </Content>
-            <Footer />
+             </Content>
         </Container>
 
     )

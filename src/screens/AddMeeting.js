@@ -72,54 +72,49 @@ class AddMeeting extends Component {
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
+               
                 <View style={styles.header}>
-                    <Body style={{ flexDirection: 'row' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Icon onPress={() => { this.props.navigation.pop() }} name="arrow-left" style={{ color: "#fff", marginLeft: 40 }} type="FontAwesome5" />
-                        </View>
-                        <View style={{ flexDirection: 'row', marginLeft: 30 }}>
-                            <Image style={styles.logo} source={require('../assets/logo.png')} />
-                        </View>
-
-                    </Body>
+                    <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()} style={{marginTop:'5%',marginRight:'10%'}}>
+                        <Icon name="long-arrow-left" />
+                    </TouchableOpacity>
+                        <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
                 <View style={styles.body}>
                     <View style={styles.signUpBody}>
                         {/* <Text style={styles.bodyTitle}>AVS - REGISTER</Text> */}
 
-                        <Item floatingLabel style={{ marginTop: 15 }}>
-                            <Label style={{ color: '#46a0b3' }}>Enter Meeting Title</Label>
-                            <Input style={{ color: '#46a0b3' }} value={title} maxLength={25} onChangeText={(text) => this.setState({ title: text })} />
+                        <Item floatingLabel style={{ marginTop: 10 }}>
+                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter Meeting Title</Label>
+                            <Input style={{ color: '#46a0b3',fontSize:14 }} value={title} maxLength={25} onChangeText={(text) => this.setState({ title: text })} />
                         </Item>
-
-                        <Item floatingLabel style={{ marginTop: 8 }}>
-                            <Label style={{ color: '#46a0b3' }}>Enter Customer Name</Label>
-                            <Input style={{ color: '#46a0b3' }} value={customer} maxLength={30} onChangeText={(text) => this.setState({ customer: text })} />
+                        <Item floatingLabel style={{ marginTop: 4 }}>
+                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter Customer Name</Label>
+                            <Input style={{ color: '#46a0b3',fontSize:14 }} value={customer} maxLength={30} onChangeText={(text) => this.setState({ customer: text })} />
                         </Item>
-                        <Item floatingLabel style={{ marginTop: 8 }}>
-                            <Label style={{ color: '#46a0b3' }}>Enter Representative Name</Label>
-                            <Input style={{ color: '#46a0b3' }} value={represenativeName} maxLength={30} onChangeText={(text) => this.setState({ represenativeName: text })} />
+                        <Item floatingLabel style={{ marginTop: 4 }}>
+                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter Representative Name</Label>
+                            <Input style={{ color: '#46a0b3',fontSize:14 }} value={represenativeName} maxLength={30} onChangeText={(text) => this.setState({ represenativeName: text })} />
                         </Item>
-                        <Item floatingLabel style={{ marginTop: 8 }}>
-                            <Label style={{ color: '#46a0b3' }}>Enter Representative Designation</Label>
-                            <Input style={{ color: '#46a0b3' }} value={represenativeDesignation} maxLength={25}
+                        <Item floatingLabel style={{ marginTop: 4 }}>
+                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter Representative Designation</Label>
+                            <Input style={{ color: '#46a0b3',fontSize:14 }} value={represenativeDesignation} maxLength={25}
                                 onChangeText={(text) => this.setState({ represenativeDesignation: text })}
                             />
                         </Item>
-                        <Item floatingLabel style={{ marginTop: 8 }}>
-                            <Label style={{ color: '#46a0b3' }}>Enter Representative Email</Label>
-                            <Input style={{ color: '#46a0b3' }} value={represenativeEmail} keyboardType="email-address" maxLength={50} onChangeText={(text) => this.setState({ represenativeEmail: text })} />
+                        <Item floatingLabel style={{ marginTop: 4 }}>
+                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter Representative Email</Label>
+                            <Input style={{ color: '#46a0b3',fontSize:14 }} value={represenativeEmail} keyboardType="email-address" maxLength={50} onChangeText={(text) => this.setState({ represenativeEmail: text })} />
                         </Item>
-                        <Item floatingLabel style={{ marginTop: 8 }}>
-                            <Label style={{ color: '#46a0b3' }}>Enter Representative Contact</Label>
-                            <Input style={{ color: '#46a0b3' }} value={represenativeContact} keyboardType="number-pad" maxLength={11} onChangeText={(text) => this.setState({ represenativeContact: text })} />
+                        <Item floatingLabel style={{ marginTop: 4 }}>
+                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter Representative Contact</Label>
+                            <Input style={{ color: '#46a0b3',fontSize:14 }} value={represenativeContact} keyboardType="number-pad" maxLength={11} onChangeText={(text) => this.setState({ represenativeContact: text })} />
                         </Item>
                         <TouchableOpacity style={{
                             backgroundColor: '#46a0b3',
                             width: '100%',
                             // alignItems: 'center',
-                            marginTop: '5%',
-                            marginBottom: '5%',
+                            marginTop: '4%',
+                            marginBottom: '4%',
                             paddingTop: 10,
                             paddingBottom: 10,
                             borderRadius: 5
@@ -134,19 +129,15 @@ class AddMeeting extends Component {
                             </View>
                         </TouchableOpacity>
 
-                        {/* <Item floatingLabel style={{ marginTop: 8 }}>
-                            <Label style={{ color: '#46a0b3' }}>Enter Select Location</Label>
-                            <Input style={{ color: '#46a0b3' }} value={location} keyboardType="number-pad" maxLength={11} onChangeText={(text) => this.setState({ location: text })} />
-                        </Item> */}
-                        <Textarea bordered style={{ borderRadius: 5, color: '#46a0b3', width: '100%' }} placeholderTextColor="#46a0b3" value={agenda} onChangeText={(text) => this.setState({ agenda: text })} rowSpan={3} placeholder="Enter Meeting Agenda" />
+                        <Textarea bordered style={{ borderRadius: 5, color: '#46a0b3', width: '100%',fontSize:14 }} placeholderTextColor="#46a0b3" value={agenda} onChangeText={(text) => this.setState({ agenda: text })} rowSpan={2} placeholder="Enter Meeting Agenda" />
 
                         <TouchableOpacity style={{
                             backgroundColor: '#46a0b3',
                             width: '100%',
                             alignItems: 'center',
-                            marginTop: '5%',
-                            paddingTop: 15,
-                            paddingBottom: 15,
+                            marginTop: '4%',
+                            paddingTop: 10,
+                            paddingBottom: 10,
                             borderTopLeftRadius: 30,
                             borderTopRightRadius: 30,
                             borderBottomRightRadius: 30,
@@ -155,8 +146,8 @@ class AddMeeting extends Component {
                             onPress={this.addMeeting}
                         >
                             <View style={{ flexDirection: 'row' }}>
-                                <MyIcon name="file-text-o" color='#fff' size={15} style={{ marginTop: 3 }} />
-                                <Text style={{ marginLeft: 8, color: '#fff', fontSize: 15, fontWeight: '700' }}>
+                                <MyIcon name="file-text-o" color='#fff' size={14} style={{ marginTop: 3 }} />
+                                <Text style={{ marginLeft: 8, color: '#fff', fontSize: 14, fontWeight: '700' }}>
                                     ADD MEETING
                                     </Text>
                             </View>
@@ -178,17 +169,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: '#fff',
         flex: 0.15,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 35,
-
+        flexDirection: 'row',
+        marginTop:'5%',
+        width:'90%',
+        justifyContent:'center',
     },
     body: {
-        flex: 0.85,
+        flex: 1,
         display: 'flex',
         backgroundColor: '#fff',
         alignItems: 'center',
@@ -197,9 +185,6 @@ const styles = StyleSheet.create({
     logo: {
         width: 170,
         height: 60,
-        marginBottom: 20,
-        marginTop: 50,
-
     },
     signUpBody: {
         width: '80%',

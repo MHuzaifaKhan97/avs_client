@@ -36,6 +36,10 @@ class Login extends Component {
                 Alert.alert('Error', 'Weak Password');
             }
             else {
+                console.log('pressed')
+                if(email == 'saad@avs.com' && password == 'saad12345'){
+                    this.props.navigation.navigate('Home');
+                }
             }
         }
     }
