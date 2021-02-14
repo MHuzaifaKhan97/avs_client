@@ -75,7 +75,7 @@ class Login extends Component {
                 <View style={styles.body}>
                     <View style={styles.loginBody}>
                         <Text style={styles.bodyTitle}>AVS - LOGIN</Text>
-                        <Item floatingLabel style={{ marginTop: '20%' }}>
+                        <Item floatingLabel style={{ marginTop: '15%' }}>
                             <Label style={{ color: '#46a0b3' }}>Enter Email</Label>
                             <Input style={{color:'#46a0b3'}} value={email} maxLength={40} keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} />
                         </Item>
@@ -98,7 +98,7 @@ class Login extends Component {
                             backgroundColor: '#46a0b3',
                             width: '100%',
                             alignItems: 'center',
-                            marginTop: '12%',
+                            marginTop: '8%',
                             paddingTop: 15,
                             borderWidth:2,
                             borderColor: '#388a9c',
@@ -143,7 +143,7 @@ class Login extends Component {
                             </View>
                         </TouchableOpacity>
                       
-                        <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginTop:'8%'}}>
+                        <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginTop:'5%'}}>
                             <TouchableOpacity
                             style={{
                                 backgroundColor: '#fff',
@@ -198,7 +198,6 @@ class Login extends Component {
                             >
                             <Icon active solid={true} name="linkedin" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
                             </TouchableOpacity>
-         
                         </View>
                     </View>
                 </View>

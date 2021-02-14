@@ -37,6 +37,9 @@ const AppDrawer = () => {
       <Drawer.Navigator
         drawerContent={(props) => (<SideBar {...props} />)
         }
+        drawerContentOptions={{
+          style:{backgroundColor:'#46a0b3'}
+        }}
         // initialRouteName="_____________________________"
       >
         <Drawer.Screen
@@ -44,7 +47,7 @@ const AppDrawer = () => {
           component={Home}
           options={{
             drawerIcon: ({ focused, color, size }) => (
-              <Icon name="home" style={{ fontSize: size, color: color }} />
+              <Icon name="home" style={{ fontSize: size, color: '#fff' }} />
             ),
           }}
         />
@@ -54,7 +57,7 @@ const AppDrawer = () => {
           component={Meeting}
           options={{
             drawerIcon: ({ focused, color, size }) => (
-              <Icon name="people" style={{ fontSize: size, color: color }} />
+              <Icon name="people" style={{ fontSize: size, color: '#fff' }} />
             ),
           }}
         />
@@ -63,7 +66,7 @@ const AppDrawer = () => {
           component={JobCard}
           options={{
             drawerIcon: ({ focused, color, size }) => (
-              <Icon type="FontAwesome" name="briefcase" style={{ fontSize: size, color: color }} />
+              <Icon type="FontAwesome" name="briefcase" style={{ fontSize: size, color: '#fff' }} />
             ),
           }}
         />
@@ -72,7 +75,7 @@ const AppDrawer = () => {
           component={About}
           options={{
             drawerIcon: ({ focused, color, size }) => (
-              <Icon type="FontAwesome" name="info-circle" style={{ fontSize: size, color: color }} />
+              <Icon type="FontAwesome" name="info-circle" style={{ fontSize: size, color: '#fff' }} />
             ),
           }}
         />
@@ -81,7 +84,7 @@ const AppDrawer = () => {
           component={Contact}
           options={{
             drawerIcon: ({ focused, color, size }) => (
-              <Icon type="FontAwesome" name="phone" style={{ fontSize: size, color: color }} />
+              <Icon type="FontAwesome" name="phone" style={{ fontSize: size, color: '#fff' }} />
             ),
           }}
         />
@@ -89,12 +92,10 @@ const AppDrawer = () => {
           name="_____________________________"
           component={Root2}
           options={{
+            headerStyle:{color:'#fff'},
           }}
         />
-        {/* <DrawerActions.Screen name="AddMeeting" component={AddMeeting} /> */}
-        {/* <Drawer.Screen name="About" component={About} /> */}
-
-      </Drawer.Navigator>
+        </Drawer.Navigator>
     </>
   );
 }

@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     },
     myMeeting: {
         width: '100%',
-        height: '30%',
+        height: '37%',
         shadowColor: "#46a0b3",
         marginTop: 30,
         backgroundColor: '#46a0b3',
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     },
     pendingMeeting: {
         width: '100%',
-        height: '30%',
+        height: '37%',
         marginTop: '5%',
         shadowColor: "#46a0b3",
         backgroundColor: '#46a0b3',

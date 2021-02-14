@@ -92,7 +92,7 @@ class Register extends Component {
                             backgroundColor: '#46a0b3',
                             width: '100%',
                             alignItems: 'center',
-                            marginTop: '15%',
+                            marginTop: '12%',
                             paddingTop: 15,
                             paddingBottom: 15,
                             borderTopLeftRadius: 30,
@@ -109,7 +109,7 @@ class Register extends Component {
                                     </Text>
                             </View>
                         </TouchableOpacity>
-                        <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginTop:'8%'}}>
+                        <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginTop:'5%'}}>
                             <TouchableOpacity
                             style={{
                                 backgroundColor: '#fff',
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     bodyTitle: {
-        marginTop: 60,
+        marginTop: '15%',
         fontWeight: '700',
         fontSize: 35,
         alignItems: 'center',

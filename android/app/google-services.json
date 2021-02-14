@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "300288632497",
+    "project_id": "avs-client",
+    "storage_bucket": "avs-client.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300288632497:android:c286c288f59382195d2490",
+        "android_client_info": {
+          "package_name": "com.avs_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300288632497-bag61s4a8veo95duoh56ceidnitl9h83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKuRkVOAjvmhf-S5kKf6xehn73yURHJqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300288632497-bag61s4a8veo95duoh56ceidnitl9h83.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

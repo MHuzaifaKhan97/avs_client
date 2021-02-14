@@ -35,16 +35,16 @@ function SideBar({ progress, ...props }) {
     return (
         <Container>
             <StatusBar backgroundColor="#fff" />
-            <Header style={{ backgroundColor: '#fff' }}>
-                <Right>
-                    <TouchableOpacity style={{backgroundColor:'#fff'}} onPress={() => 
-                    props.navigation.dispatch(DrawerActions.closeDrawer())
+            <Header style={{ backgroundColor: '#46a0b3' }}>
+                <Right style={{ backgroundColor: '#46a0b3' }}>
+                    <TouchableOpacity style={{ backgroundColor: '#fff' }} onPress={() =>
+                        props.navigation.dispatch(DrawerActions.closeDrawer())
                     }>
-                        <Icon name="menu"  style={{color:'#46a0b3'}} />
+                        <Icon name="menu" style={{ color: '#fff', backgroundColor: '#46a0b3' }} />
                     </TouchableOpacity>
                 </Right>
             </Header>
-            <Content contentContainerStyle={{flex: 1}}>
+            <Content contentContainerStyle={{ flex: 1, backgroundColor: '#46a0b3' }}>
                 <ListItem thumbnail>
                     <Left>
                         <Thumbnail source={{
@@ -52,23 +52,24 @@ function SideBar({ progress, ...props }) {
                         }} />
                     </Left>
                     <Body>
-                        <H3>Saad Hashim</H3>
-                        <Text note>MERN Stack Developer</Text>
+                        <H3 style={{ color: '#fff' }}>Saad Hashim</H3>
+                        <Text style={{ color: '#fff' }} note>MERN Stack Developer</Text>
                     </Body>
                 </ListItem>
                 <DrawerContentScrollView {...props}>
                     <Animated.View style={{ transform: [{ translateX }] }}>
-                        <DrawerItemList {...props} />
+                        <DrawerItemList {...props} labelStyle={{ color: '#fff' }} activeTintColor="orange" activeBackgroundColor="#a1c9d1" />
                         <DrawerItem
+                            labelStyle={{ color: '#fff' }}
                             label="Log Out"
                             icon={({ color, size }) => (
-                                <Icon type="FontAwesome" name="sign-out" style={{ fontSize: size, color: color }} />
+                                <Icon type="FontAwesome" name="sign-out" style={{ fontSize: size, color: '#fff' }} />
                             )}
                             onPress={() => props.navigation.navigate('Login')}
                         />
                     </Animated.View>
                 </DrawerContentScrollView>
-             </Content>
+            </Content>
         </Container>
 
     )
