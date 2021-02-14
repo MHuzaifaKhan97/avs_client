@@ -28,6 +28,8 @@ import AddMeeting from './AddMeeting';
 import Contact from './Contact';
 import About from './About';
 import AddJobCard from './AddJobCard';
+import PendingMeetings from './PendingMeetings';
+import PendingJobCards from './PendingJobCards';
 
 const Drawer = createDrawerNavigator();
 
@@ -110,6 +112,8 @@ function Root2() {
       <Stack.Screen name="Register" options={{ headerShown: false }} component={Register} />
       <Stack.Screen name="AddMeeting" options={{ headerShown: false }} component={AddMeeting} />
       <Stack.Screen name="AddJobCard" options={{ headerShown: false }} component={AddJobCard} />
+      <Stack.Screen name="PendingMeetings" options={{ headerShown: false }} component={PendingMeetings} />
+      <Stack.Screen name="PendingJobCards" options={{ headerShown: false }} component={PendingJobCards} />
     </Stack.Navigator>
   );
 }

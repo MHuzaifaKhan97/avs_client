@@ -38,8 +38,8 @@ class Splash extends Component {
         }
         return (
             <React.Fragment>
-                <StatusBar backgroundColor="#fff" />
                 <View style={styles.container}>
+                <StatusBar backgroundColor="#fff" />
                    <View style={{...styles.topSide,paddingTop:this.state.checkAnim ? 0 :250}}>
                    <Animated.View useNativeDr style={[styles.animatedBox, transformStyle]}>
                         <Image

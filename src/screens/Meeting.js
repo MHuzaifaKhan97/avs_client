@@ -25,11 +25,12 @@ class Meeting extends Component {
         console.log('Clicked');
     }
     gotoAddNewMeeting = () => {
-        console.log('Clicked');
         console.log(this.props.navigation.navigate('_____________________________', { screen: 'AddMeeting' }));
     }
 
-
+    gotoPendingMeetings = () =>{
+        console.log(this.props.navigation.navigate('_____________________________', { screen: 'PendingMeetings' }));
+    }
 
     render() {
         const { isPasswordShown, email, password, showSpinner } = this.state;
@@ -50,7 +51,7 @@ class Meeting extends Component {
                             <Text style={styles.myMeetingText}>Add New Meeting</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => console.log('goto my pending meeting')} style={styles.pendingMeeting}>
+                        <TouchableOpacity onPress={() => this.gotoPendingMeetings()} style={styles.pendingMeeting}>
                             <Text style={styles.pendingMeetingText}>My Pending Meetings</Text>
                         </TouchableOpacity>
 

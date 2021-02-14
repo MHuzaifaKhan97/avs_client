@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, StatusBar, ScrollView, TouchableOpacity,
 import { Title, Input, Item, Body, Label, Icon, Spinner } from 'native-base';
 import MyIcon from 'react-native-vector-icons/FontAwesome';
 
-class Home extends Component {
+class PendingJobCards extends Component {
 
     state = {
         isPasswordShown: false,
@@ -50,8 +50,8 @@ class Home extends Component {
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()} style={{marginTop:'5%',marginRight:'10%'}}>
-                        <Icon name="menu" style={{color:'#46a0b3'}} />
+                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('Meeting')} style={{marginTop:'5%',marginRight:'10%'}}>
+                        <Icon name="arrow-left" type="FontAwesome" style={{color:'#46a0b3'}} />
                     </TouchableOpacity>
                         <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
@@ -59,13 +59,13 @@ class Home extends Component {
                     <View style={styles.loginBody}>
 
 
-                        <Text style={styles.bodyTitle}> WELCOME TO AVS</Text>
+                        <Text style={styles.bodyTitle}> MY PENDING JOBCARDS</Text>
 
 
                         <ScrollView style={{ width: '100%', height: '85%' }}>
 
                             <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
 
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
@@ -77,7 +77,7 @@ class Home extends Component {
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
 
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
@@ -89,19 +89,7 @@ class Home extends Component {
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Done</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
 
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
@@ -113,31 +101,7 @@ class Home extends Component {
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Done</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Done</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
 
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
@@ -149,7 +113,79 @@ class Home extends Component {
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
+
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
+                                    <Text style={styles.meetingsTitle}>Pending</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>Location</Text>
+                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.meetings}>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
+
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
+                                    <Text style={styles.meetingsTitle}>Pending</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>Location</Text>
+                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.meetings}>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
+
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
+                                    <Text style={styles.meetingsTitle}>Pending</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>Location</Text>
+                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.meetings}>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
+
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
+                                    <Text style={styles.meetingsTitle}>Pending</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>Location</Text>
+                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.meetings}>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
+
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
+                                    <Text style={styles.meetingsTitle}>Pending</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>Location</Text>
+                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.meetings}>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
+
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
+                                    <Text style={styles.meetingsTitle}>Pending</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.meetingsTitle}>Location</Text>
+                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.meetings}>
+                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
 
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
@@ -161,7 +197,7 @@ class Home extends Component {
                                 </View>
                             </TouchableOpacity>
 
-                        </ScrollView>
+                 </ScrollView>
 
                     </View>
                 </View>
@@ -170,7 +206,7 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default PendingJobCards;
 
 const styles = StyleSheet.create({
     container: {
@@ -196,8 +232,6 @@ const styles = StyleSheet.create({
     logo: {
         width: 170,
         height: 60,
-        // marginBottom: 20,
-        // marginTop: '16%',
     },
     loginBody: {
         width: '80%',
@@ -207,7 +241,7 @@ const styles = StyleSheet.create({
         marginTop: '5%',
         marginBottom: '5%',
         fontWeight: '700',
-        fontSize: 30,
+        fontSize: 24,
         alignItems: 'center',
         color: '#46a0b3',
         textShadowColor: 'rgba(0, 0, 0, 0.75)',

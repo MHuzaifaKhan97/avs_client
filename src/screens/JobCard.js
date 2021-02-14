@@ -43,6 +43,9 @@ class JobCard extends Component {
     gotoAddJobCard = () => {
         console.log(this.props.navigation.navigate('_____________________________', { screen: 'AddJobCard' }));
     }
+    gotoPendingJobCards = () => {
+        console.log(this.props.navigation.navigate('_____________________________', { screen: 'PendingJobCards' }));
+    }
     render() {
         const { isPasswordShown, email, password, showSpinner } = this.state;
         return (
@@ -63,7 +66,7 @@ class JobCard extends Component {
                             <Text style={styles.myMeetingText}>Add New JOB CARD</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => console.log('goto my pending meeting')} style={styles.pendingMeeting}>
+                        <TouchableOpacity onPress={() => this.gotoPendingJobCards()} style={styles.pendingMeeting}>
                             <Text style={styles.pendingMeetingText}>My Pending JOB CARD</Text>
                         </TouchableOpacity>
 
