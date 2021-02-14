@@ -52,15 +52,10 @@ class Register extends Component {
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
                 <View style={styles.header}>
-                    <Body style={{ flexDirection: 'row' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Icon onPress={() => { this.props.navigation.pop() }} name="arrow-left" style={{ color: "#fff", marginLeft: 40 }} type="FontAwesome5" />
-                        </View>
-                        <View style={{ flexDirection: 'row', marginLeft: 30 }}>
-                            <Image style={styles.logo} source={require('../assets/logo.png')} />
-                        </View>
-
-                    </Body>
+                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')} style={{marginTop:'5%',marginRight:'10%'}}>
+                        <Icon name="arrow-left" type="FontAwesome" style={{color:'#46a0b3'}} />
+                    </TouchableOpacity>
+                        <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
                 <View style={styles.body}>
                     <View style={styles.signUpBody}>
@@ -184,14 +179,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: '#fff',
         flex: 0.15,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 35,
-     
+        flexDirection: 'row',
+        marginTop:'5%',
+        width:'90%',
+        justifyContent:'center',
     },
     body: {
         flex: 0.85,
@@ -203,10 +195,7 @@ const styles = StyleSheet.create({
     logo: {
         width: 170,
         height: 60,
-        marginBottom: 20,
-        marginTop:50,
-
-    },
+     },
     signUpBody: {
         width: '80%',
         alignItems: 'center',
