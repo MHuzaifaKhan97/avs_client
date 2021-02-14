@@ -25,13 +25,38 @@ import { StatusBar } from 'react-native';
 import Animated from "react-native-reanimated";
 import { DrawerActions } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
+import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 
 function SideBar({ progress, ...props }) {
     const translateX = Animated.interpolate(progress, {
         inputRange: [0, 1],
         outputRange: [-100, 0]
     });
+    const logOut = () => {
+        auth().signOut().then(() => {
+            props.navigation.navigate('Login');
+        })
+    }
+    let [authUser, setAuthUser] = useState({});
+    useEffect(() => {
+        auth().onAuthStateChanged((user) => {
+            if (user) {
+                database().ref('users').once('value', (data) => {
+                    for (var key in data.val()) {
+                        if (data.val()[key].email.toLowerCase() === user.email.toLowerCase()) {
+                            setTimeout(() => {
+                                setAuthUser(data.val()[key])
+                            }, 1200);
+                        }
+                    }
+                })
+            }
+        })
 
+        console.log(authUser);
+    }, [])
     return (
         <Container>
             <StatusBar backgroundColor="#fff" />
@@ -48,12 +73,12 @@ function SideBar({ progress, ...props }) {
                 <ListItem thumbnail>
                     <Left>
                         <Thumbnail source={{
-                            uri: 'https://attiehandassociates.co.za/wp-content/uploads/2014/08/Profile-Pic-Demo.png'
+                            uri: authUser ? authUser.photoURL : 'https://attiehandassociates.co.za/wp-content/uploads/2014/08/Profile-Pic-Demo.png'
                         }} />
                     </Left>
                     <Body>
-                        <H3 style={{ color: '#fff' }}>Saad Hashim</H3>
-                        <Text style={{ color: '#fff' }} note>MERN Stack Developer</Text>
+                        <H3 style={{ color: '#fff' }}>{authUser ? authUser.name : ""}</H3>
+                        <Text style={{ color: '#fff' }} note>{authUser ? authUser.email : ""}</Text>
                     </Body>
                 </ListItem>
                 <DrawerContentScrollView {...props}>
@@ -65,7 +90,7 @@ function SideBar({ progress, ...props }) {
                             icon={({ color, size }) => (
                                 <Icon type="FontAwesome" name="sign-out" style={{ fontSize: size, color: '#fff' }} />
                             )}
-                            onPress={() => props.navigation.navigate('Login')}
+                            onPress={() => logOut()}
                         />
                     </Animated.View>
                 </DrawerContentScrollView>

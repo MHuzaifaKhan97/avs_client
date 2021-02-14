@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Image, StatusBar, TouchableOpacity, Alert } from 'react-native';
 import { Title, Input, Item, Body, Label, Icon, Textarea } from 'native-base';
 import MyIcon from 'react-native-vector-icons/FontAwesome';
-import Geolocation from '@react-native-community/geolocation';
 
 class AddJobCard extends Component {
 

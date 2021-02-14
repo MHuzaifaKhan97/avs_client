@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Image, StatusBar, ScrollView, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
 import { Title, Input, Item, Body, Label, Icon, Spinner } from 'native-base';
 import MyIcon from 'react-native-vector-icons/FontAwesome';
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
 class PendingMeetings extends Component {
 
@@ -11,49 +13,43 @@ class PendingMeetings extends Component {
         password: '',
         showSpinner: false,
         socialLoggedIn: false,
-        userInfo: [],
+        meetingInfo: [],
     }
 
     componentDidMount() {
-    }
-
-    showHidePassword = () => {
+        const { meetingInfo } = this.state;
         this.setState({
-            isPasswordShown: !this.state.isPasswordShown
-        });
-        console.log('Clicked');
-    }
-    loggedIn = () => {
-
-        const { email, password } = this.state;
-        if (email == "") {
-            Alert.alert('Error', 'Please Enter Your Email',);
-        } else if (password == "") {
-            Alert.alert('Error', 'Please Enter Your Password',);
-        }
-        else {
-            if (password.length <= 8) {
-                Alert.alert('Error', 'Weak Password');
-            }
-            else {
-            }
-        }
+            showSpinner: true
+        })
+        database().ref('meetings').once('value', (data) => {
+            setTimeout(() => {
+                for (var key in data.val()) {
+                    this.setState({
+                        meetingInfo: [data.val()[key], ...meetingInfo]
+                    })
+                    // console.log(data.val()[key])
+                }
+                this.setState({
+                    showSpinner:false
+                })
+            }, 2000);
+         
+        })
     }
 
-    drawerOpen = () => {
-        console.log('Pressed');
-        console.log(this.props.navigation);
-    }
+
     render() {
-        const { isPasswordShown, email, password, showSpinner } = this.state;
+        const { isPasswordShown, email, password, showSpinner, meetingInfo } = this.state;
+        console.log(meetingInfo)
+
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('Meeting')} style={{marginTop:'5%',marginRight:'10%'}}>
-                        <Icon name="arrow-left" type="FontAwesome" style={{color:'#46a0b3'}} />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Meeting')} style={{ marginTop: '5%', marginRight: '10%' }}>
+                        <Icon name="arrow-left" type="FontAwesome" style={{ color: '#46a0b3' }} />
                     </TouchableOpacity>
-                        <Image style={styles.logo} source={require('../assets/logo.png')} />
+                    <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
                 <View style={styles.body}>
                     <View style={styles.loginBody}>
@@ -62,106 +58,31 @@ class PendingMeetings extends Component {
                         <Text style={styles.bodyTitle}> MY PENDING MEETINGS</Text>
 
 
-                        <ScrollView style={{ width: '100%', height: '85%' }}>
+                        {/* <ScrollView style={{ width: '100%', height: '85%' }}> */}
 
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
+                            {
+                                !showSpinner ?
+                                    meetingInfo.map((meeting) => {
+                                      return  <TouchableOpacity key={meeting.id} style={styles.meetings}>
+                                            <Text style={styles.meetingsTitle}>{meeting.title}</Text>
 
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Pending</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <Text style={styles.meetingsTitle}>{meeting.represenativeEmail}</Text>
+                                                <Text style={styles.meetingsTitle}>{meeting.status}</Text>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <Text style={styles.meetingsTitle}>{meeting.location}</Text>
+                                                <Text style={styles.meetingsTitle}>{meeting.date}</Text>
+                                            </View>
+                                        </TouchableOpacity>
 
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Pending</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Done</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Pending</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Done</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Done</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Pending</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>Meeting Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Pending</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                        </ScrollView>
+                                    }) :
+                                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                        <Spinner color="#46a0b3" />
+                                    </View>
+                               
+                            }
+                        {/* </ScrollView> */}
 
                     </View>
                 </View>
@@ -182,9 +103,9 @@ const styles = StyleSheet.create({
     header: {
         flex: 0.15,
         flexDirection: 'row',
-        marginTop:'5%',
-        width:'90%',
-        justifyContent:'center',
+        marginTop: '5%',
+        width: '90%',
+        justifyContent: 'center',
     },
     body: {
         flex: 1,

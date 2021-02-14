@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Image, StatusBar, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
 import { Title, Input, Item, Body, Label, Icon, Spinner } from 'native-base';
 import MyIcon from 'react-native-vector-icons/FontAwesome';
+import auth from '@react-native-firebase/auth';
+
 
 class Login extends Component {
 
@@ -15,6 +17,11 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.props.navigation.navigate('Home');
+            }
+        })
     }
 
     showHidePassword = () => {
@@ -32,35 +39,29 @@ class Login extends Component {
             Alert.alert('Error', 'Please Enter Your Password',);
         }
         else {
-            if (password.length <= 8) {
-                Alert.alert('Error', 'Weak Password');
-            }
-            else {
-                console.log('pressed')
-                if(email == 'saad@avs.com' && password == 'saad12345'){
-                    this.props.navigation.navigate('Home');
-                }
-            }
+            auth().signInWithEmailAndPassword(email, password)
+                .then((response) => {
+                    this.setState({
+                        showSpinner: true,
+                    })
+                    setTimeout(() => {
+                        this.props.navigation.navigate('Home');
+                        this.setState({
+                            showSpinner: false,
+                            email: null,
+                            password: null,
+                        })
+                    }, 2500);
+                    return <View><Spinner color='blue' /></View>
+                }).catch((error) => {
+                    this.setState({
+                        showSpinner: false,
+                    })
+                    Alert.alert('Error', error.message);
+                })
         }
     }
-    signInWithFacebook = () => {
-        ToastAndroid.showWithGravityAndOffset(
-            "Facebook Signin Available Soon",
-            ToastAndroid.LONG,
-            ToastAndroid.BOTTOM,
-            25,
-            50
-          );
-    }
-    signInWithGoogle = () => {
-        ToastAndroid.showWithGravityAndOffset(
-            "Google Signin Available Soon",
-            ToastAndroid.LONG,
-            ToastAndroid.BOTTOM,
-            25,
-            50
-          );
-    }
+
 
     render() {
         const { isPasswordShown, email, password, showSpinner } = this.state;
@@ -77,11 +78,11 @@ class Login extends Component {
                         <Text style={styles.bodyTitle}>AVS - LOGIN</Text>
                         <Item floatingLabel style={{ marginTop: '15%' }}>
                             <Label style={{ color: '#46a0b3' }}>Enter Email</Label>
-                            <Input style={{color:'#46a0b3'}} value={email} maxLength={40} keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} />
+                            <Input style={{ color: '#46a0b3' }} value={email} maxLength={40} keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} />
                         </Item>
                         <Item floatingLabel style={{ marginTop: 10 }}>
                             <Label style={{ color: '#46a0b3' }}>Enter Password...</Label>
-                            <Input style={{color:'#46a0b3'}} value={password} maxLength={25} onChangeText={(text) => this.setState({ password: text })} secureTextEntry={!isPasswordShown} />
+                            <Input style={{ color: '#46a0b3' }} value={password} maxLength={25} onChangeText={(text) => this.setState({ password: text })} secureTextEntry={!isPasswordShown} />
                             <Icon active solid={true} name={isPasswordShown ? "eye-slash" : "eye"} type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 16 }} onPress={this.showHidePassword} />
                         </Item>
                         <View style={{ flexDirection: 'row' }}>
@@ -100,10 +101,10 @@ class Login extends Component {
                             alignItems: 'center',
                             marginTop: '8%',
                             paddingTop: 15,
-                            borderWidth:2,
+                            borderWidth: 2,
                             borderColor: '#388a9c',
                             borderWidth: 2,
-                            borderColor:'#fff',
+                            borderColor: '#fff',
                             paddingBottom: 15,
                             borderTopLeftRadius: 30,
                             borderTopRightRadius: 30,
@@ -142,61 +143,61 @@ class Login extends Component {
                                     </Text>
                             </View>
                         </TouchableOpacity>
-                      
-                        <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginTop:'5%'}}>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: '5%' }}>
                             <TouchableOpacity
-                            style={{
-                                backgroundColor: '#fff',
-                                width: '30%',
-                                alignItems: 'center',
-                                marginTop: 10,
-                                paddingTop: 15,
-                                paddingBottom: 15,
-                                borderColor: '#388a9c',
-                                borderWidth: 2,
-                                borderTopLeftRadius: 30,
-                                borderTopRightRadius: 30,
-                                borderBottomRightRadius: 30,
-                                borderBottomLeftRadius: 30,
-                            }}
+                                style={{
+                                    backgroundColor: '#fff',
+                                    width: '30%',
+                                    alignItems: 'center',
+                                    marginTop: 10,
+                                    paddingTop: 15,
+                                    paddingBottom: 15,
+                                    borderColor: '#388a9c',
+                                    borderWidth: 2,
+                                    borderTopLeftRadius: 30,
+                                    borderTopRightRadius: 30,
+                                    borderBottomRightRadius: 30,
+                                    borderBottomLeftRadius: 30,
+                                }}
                             >
-                            <Icon active solid={true} name="facebook" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
+                                <Icon active solid={true} name="facebook" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
                             </TouchableOpacity>
                             <TouchableOpacity
-                            style={{
-                                backgroundColor: '#fff',
-                                width: '30%',
-                                alignItems: 'center',
-                                marginTop: 10,
-                                paddingTop: 15,
-                                paddingBottom: 15,
-                                borderColor: '#388a9c',
-                                borderWidth: 2,
-                                borderTopLeftRadius: 30,
-                                borderTopRightRadius: 30,
-                                borderBottomRightRadius: 30,
-                                borderBottomLeftRadius: 30,
-                            }}
+                                style={{
+                                    backgroundColor: '#fff',
+                                    width: '30%',
+                                    alignItems: 'center',
+                                    marginTop: 10,
+                                    paddingTop: 15,
+                                    paddingBottom: 15,
+                                    borderColor: '#388a9c',
+                                    borderWidth: 2,
+                                    borderTopLeftRadius: 30,
+                                    borderTopRightRadius: 30,
+                                    borderBottomRightRadius: 30,
+                                    borderBottomLeftRadius: 30,
+                                }}
                             >
-                            <Icon active solid={true} name="twitter" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
+                                <Icon active solid={true} name="twitter" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
                             </TouchableOpacity>
                             <TouchableOpacity
-                            style={{
-                                backgroundColor: '#fff',
-                                width: '30%',
-                                alignItems: 'center',
-                                marginTop: 10,
-                                paddingTop: 15,
-                                paddingBottom: 15,
-                                borderColor: '#388a9c',
-                                borderWidth: 2,
-                                borderTopLeftRadius: 30,
-                                borderTopRightRadius: 30,
-                                borderBottomRightRadius: 30,
-                                borderBottomLeftRadius: 30,
-                            }}
+                                style={{
+                                    backgroundColor: '#fff',
+                                    width: '30%',
+                                    alignItems: 'center',
+                                    marginTop: 10,
+                                    paddingTop: 15,
+                                    paddingBottom: 15,
+                                    borderColor: '#388a9c',
+                                    borderWidth: 2,
+                                    borderTopLeftRadius: 30,
+                                    borderTopRightRadius: 30,
+                                    borderBottomRightRadius: 30,
+                                    borderBottomLeftRadius: 30,
+                                }}
                             >
-                            <Icon active solid={true} name="linkedin" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
+                                <Icon active solid={true} name="linkedin" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
         flex: 0.15,
         borderBottomLeftRadius: 35,
         borderBottomRightRadius: 35,
-      
+
     },
     body: {
         flex: 0.85,
@@ -235,7 +236,7 @@ const styles = StyleSheet.create({
         width: 170,
         height: 60,
         marginBottom: 20,
-        marginTop:50,
+        marginTop: 50,
     },
     loginBody: {
         width: '80%',

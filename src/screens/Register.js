@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Image, StatusBar, TouchableOpacity, Alert } from 'react-native';
 import { Title, Input, Item, Body, Label, Icon, Left } from 'native-base';
 import MyIcon from 'react-native-vector-icons/FontAwesome';
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
 class Register extends Component {
 
@@ -23,7 +25,8 @@ class Register extends Component {
     }
     createUser = () => {
         const { name, email, password, contactNo } = this.state;
-   
+        let id = database().ref("users").push().key;
+
         if (name == "") {
             Alert.alert('Error', 'Please Enter Your Name',);
         } else if (email == "") {
@@ -41,6 +44,27 @@ class Register extends Component {
                 Alert.alert('Error', 'Invalid Contact Number');
             }
             else {
+                auth().createUserWithEmailAndPassword(email, password)
+                    .then((response) => {
+                        database().ref(`users/${id}`).set({
+                            id: id,
+                            name: name,
+                            email: email,
+                            password: password,
+                            contactNo: contactNo,
+                            photoURL: '',
+                        });
+                        Alert.alert('Success', 'Successfully User Created.');
+                        this.props.navigation.navigate('Home');
+                    }).catch((error) => {
+                        Alert.alert('Error', error.message);
+                    })
+                this.setState({
+                    name: '',
+                    email: '',
+                    password: '',
+                    contactNo: '',
+                })
 
             }
         }
@@ -52,10 +76,10 @@ class Register extends Component {
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')} style={{marginTop:'5%',marginRight:'10%'}}>
-                        <Icon name="arrow-left" type="FontAwesome" style={{color:'#46a0b3'}} />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={{ marginTop: '5%', marginRight: '10%' }}>
+                        <Icon name="arrow-left" type="FontAwesome" style={{ color: '#46a0b3' }} />
                     </TouchableOpacity>
-                        <Image style={styles.logo} source={require('../assets/logo.png')} />
+                    <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
                 <View style={styles.body}>
                     <View style={styles.signUpBody}>
@@ -63,20 +87,20 @@ class Register extends Component {
 
                         <Item floatingLabel style={{ marginTop: 15 }}>
                             <Label style={{ color: '#46a0b3' }}>Enter Name</Label>
-                            <Input style={{color:'#46a0b3'}} value={name} maxLength={25} onChangeText={(text) => this.setState({ name: text })} />
+                            <Input style={{ color: '#46a0b3' }} value={name} maxLength={25} onChangeText={(text) => this.setState({ name: text })} />
                         </Item>
 
                         <Item floatingLabel style={{ marginTop: 10 }}>
                             <Label style={{ color: '#46a0b3' }}>Enter Email</Label>
-                            <Input style={{color:'#46a0b3'}} value={email} maxLength={30} keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} />
+                            <Input style={{ color: '#46a0b3' }} value={email} maxLength={30} keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} />
                         </Item>
                         <Item floatingLabel style={{ marginTop: 10 }}>
                             <Label style={{ color: '#46a0b3' }}>Enter Contact No</Label>
-                            <Input style={{color:'#46a0b3'}} value={contactNo} maxLength={11} keyboardType="numeric" onChangeText={(text) => this.setState({ contactNo: text })} />
+                            <Input style={{ color: '#46a0b3' }} value={contactNo} maxLength={11} keyboardType="numeric" onChangeText={(text) => this.setState({ contactNo: text })} />
                         </Item>
                         <Item floatingLabel style={{ marginTop: 10 }}>
                             <Label style={{ color: '#46a0b3' }}>Enter Password...</Label>
-                            <Input style={{color:'#46a0b3'}} value={password} maxLength={25}
+                            <Input style={{ color: '#46a0b3' }} value={password} maxLength={25}
                                 onChangeText={(text) => this.setState({ password: text })}
                                 secureTextEntry={!isPasswordShown}
                             />
@@ -104,62 +128,62 @@ class Register extends Component {
                                     </Text>
                             </View>
                         </TouchableOpacity>
-                        <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginTop:'5%'}}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: '5%' }}>
                             <TouchableOpacity
-                            style={{
-                                backgroundColor: '#fff',
-                                width: '30%',
-                                alignItems: 'center',
-                                marginTop: 10,
-                                paddingTop: 15,
-                                paddingBottom: 15,
-                                borderColor: '#388a9c',
-                                borderWidth: 2,
-                                borderTopLeftRadius: 30,
-                                borderTopRightRadius: 30,
-                                borderBottomRightRadius: 30,
-                                borderBottomLeftRadius: 30,
-                            }}
+                                style={{
+                                    backgroundColor: '#fff',
+                                    width: '30%',
+                                    alignItems: 'center',
+                                    marginTop: 10,
+                                    paddingTop: 15,
+                                    paddingBottom: 15,
+                                    borderColor: '#388a9c',
+                                    borderWidth: 2,
+                                    borderTopLeftRadius: 30,
+                                    borderTopRightRadius: 30,
+                                    borderBottomRightRadius: 30,
+                                    borderBottomLeftRadius: 30,
+                                }}
                             >
-                            <Icon active solid={true} name="facebook" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
+                                <Icon active solid={true} name="facebook" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
                             </TouchableOpacity>
                             <TouchableOpacity
-                            style={{
-                                backgroundColor: '#fff',
-                                width: '30%',
-                                alignItems: 'center',
-                                marginTop: 10,
-                                paddingTop: 15,
-                                paddingBottom: 15,
-                                borderColor: '#388a9c',
-                                borderWidth: 2,
-                                borderTopLeftRadius: 30,
-                                borderTopRightRadius: 30,
-                                borderBottomRightRadius: 30,
-                                borderBottomLeftRadius: 30,
-                            }}
+                                style={{
+                                    backgroundColor: '#fff',
+                                    width: '30%',
+                                    alignItems: 'center',
+                                    marginTop: 10,
+                                    paddingTop: 15,
+                                    paddingBottom: 15,
+                                    borderColor: '#388a9c',
+                                    borderWidth: 2,
+                                    borderTopLeftRadius: 30,
+                                    borderTopRightRadius: 30,
+                                    borderBottomRightRadius: 30,
+                                    borderBottomLeftRadius: 30,
+                                }}
                             >
-                            <Icon active solid={true} name="twitter" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
+                                <Icon active solid={true} name="twitter" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
                             </TouchableOpacity>
                             <TouchableOpacity
-                            style={{
-                                backgroundColor: '#fff',
-                                width: '30%',
-                                alignItems: 'center',
-                                marginTop: 10,
-                                paddingTop: 15,
-                                paddingBottom: 15,
-                                borderColor: '#388a9c',
-                                borderWidth: 2,
-                                borderTopLeftRadius: 30,
-                                borderTopRightRadius: 30,
-                                borderBottomRightRadius: 30,
-                                borderBottomLeftRadius: 30,
-                            }}
+                                style={{
+                                    backgroundColor: '#fff',
+                                    width: '30%',
+                                    alignItems: 'center',
+                                    marginTop: 10,
+                                    paddingTop: 15,
+                                    paddingBottom: 15,
+                                    borderColor: '#388a9c',
+                                    borderWidth: 2,
+                                    borderTopLeftRadius: 30,
+                                    borderTopRightRadius: 30,
+                                    borderBottomRightRadius: 30,
+                                    borderBottomLeftRadius: 30,
+                                }}
                             >
-                            <Icon active solid={true} name="linkedin" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
+                                <Icon active solid={true} name="linkedin" type='FontAwesome5' style={{ color: '#46a0b3', fontSize: 20 }} onPress={() => console.log()} />
                             </TouchableOpacity>
-         
+
                         </View>
 
                     </View>
@@ -181,9 +205,9 @@ const styles = StyleSheet.create({
     header: {
         flex: 0.15,
         flexDirection: 'row',
-        marginTop:'5%',
-        width:'90%',
-        justifyContent:'center',
+        marginTop: '5%',
+        width: '90%',
+        justifyContent: 'center',
     },
     body: {
         flex: 0.85,
@@ -191,11 +215,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
     },
-  
+
     logo: {
         width: 170,
         height: 60,
-     },
+    },
     signUpBody: {
         width: '80%',
         alignItems: 'center',

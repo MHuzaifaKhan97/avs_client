@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "300288632497",
+    "firebase_url": "https://avs-client-default-rtdb.firebaseio.com",
     "project_id": "avs-client",
     "storage_bucket": "avs-client.appspot.com"
   },

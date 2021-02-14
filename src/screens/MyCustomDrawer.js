@@ -42,7 +42,7 @@ const AppDrawer = () => {
         drawerContentOptions={{
           style:{backgroundColor:'#46a0b3'}
         }}
-        // initialRouteName="_____________________________"
+        initialRouteName="_____________________________"
       >
         <Drawer.Screen
           name="Home"
