@@ -4,7 +4,7 @@ import { Title, Input, Item, Body, Label, Icon, Textarea } from 'native-base';
 import MyIcon from 'react-native-vector-icons/FontAwesome';
 import Geolocation from '@react-native-community/geolocation';
 
-class AddMeeting extends Component {
+class AddJobCard extends Component {
 
     state = {
         title: '',
@@ -14,13 +14,13 @@ class AddMeeting extends Component {
         represenativeContact: '',
         represenativeEmail: '',
         location: '',
-        agenda: '',
+        description: '',
     }
     componentDidMount() {
 
     }
     getlocation = () => { }
-    addMeeting = () => {
+    addJobCard = () => {
         const { title,
             customer,
             represenativeName,
@@ -28,10 +28,10 @@ class AddMeeting extends Component {
             represenativeContact,
             represenativeEmail,
             location,
-            agenda } = this.state;
+            description } = this.state;
 
         if (title == "") {
-            Alert.alert('Error', 'Please Enter Meeting Title',);
+            Alert.alert('Error', 'Please Enter JobCard Title',);
         } else if (customer == "") {
             Alert.alert('Error', 'Please Enter Customer Name',);
         } else if (represenativeName == "") {
@@ -44,8 +44,8 @@ class AddMeeting extends Component {
             Alert.alert('Error', 'Please Enter Representative Contact Number',);
         } else if (location == "") {
             Alert.alert('Error', 'Please Select Location',);
-        } else if (agenda == "") {
-            Alert.alert('Error', 'Please Enter Meeting Agenda',);
+        } else if (description == "") {
+            Alert.alert('Error', 'Please Enter JobCard Description',);
         }
         else {
             if (password.length <= 8) {
@@ -68,7 +68,7 @@ class AddMeeting extends Component {
             represenativeContact,
             represenativeEmail,
             location,
-            agenda } = this.state;
+            description } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
@@ -84,7 +84,7 @@ class AddMeeting extends Component {
                         {/* <Text style={styles.bodyTitle}>AVS - REGISTER</Text> */}
 
                         <Item floatingLabel style={{ marginTop: 10 }}>
-                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter Meeting Title</Label>
+                            <Label style={{ color: '#46a0b3',fontSize:14 }}>Enter JobCard Title</Label>
                             <Input style={{ color: '#46a0b3',fontSize:14 }} value={title} maxLength={25} onChangeText={(text) => this.setState({ title: text })} />
                         </Item>
                         <Item floatingLabel style={{ marginTop: 4 }}>
@@ -129,7 +129,7 @@ class AddMeeting extends Component {
                             </View>
                         </TouchableOpacity>
 
-                        <Textarea bordered style={{ borderRadius: 5, color: '#46a0b3', width: '100%',fontSize:14 }} placeholderTextColor="#46a0b3" value={agenda} onChangeText={(text) => this.setState({ agenda: text })} rowSpan={2} placeholder="Enter Meeting Agenda" />
+                        <Textarea bordered style={{ borderRadius: 5, color: '#46a0b3', width: '100%',fontSize:14 }} placeholderTextColor="#46a0b3" value={description} onChangeText={(text) => this.setState({ description: text })} rowSpan={2} placeholder="Enter JobCard Description" />
 
                         <TouchableOpacity style={{
                             backgroundColor: '#46a0b3',
@@ -143,12 +143,12 @@ class AddMeeting extends Component {
                             borderBottomRightRadius: 30,
                             borderBottomLeftRadius: 30,
                         }}
-                            onPress={this.addMeeting}
+                            onPress={this.addJobCard}
                         >
                             <View style={{ flexDirection: 'row' }}>
-                                <MyIcon name="file-text-o" color='#fff' size={14} style={{ marginTop: 3 }} />
+                                <MyIcon name="briefcase" color='#fff' size={14} style={{ marginTop: 3 }} />
                                 <Text style={{ marginLeft: 8, color: '#fff', fontSize: 14, fontWeight: '700' }}>
-                                    ADD MEETING
+                                    ADD JOBCARD
                                     </Text>
                             </View>
                         </TouchableOpacity>
@@ -159,7 +159,7 @@ class AddMeeting extends Component {
     }
 }
 
-export default AddMeeting;
+export default AddJobCard;
 
 const styles = StyleSheet.create({
     container: {

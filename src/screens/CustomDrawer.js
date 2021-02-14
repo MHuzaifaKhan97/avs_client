@@ -40,7 +40,7 @@ function SideBar({ progress, ...props }) {
                     <TouchableOpacity style={{backgroundColor:'#fff'}} onPress={() => 
                     props.navigation.dispatch(DrawerActions.closeDrawer())
                     }>
-                        <Icon name="menu" color={'#46a0b3'} />
+                        <Icon name="menu"  style={{color:'#46a0b3'}} />
                     </TouchableOpacity>
                 </Right>
             </Header>

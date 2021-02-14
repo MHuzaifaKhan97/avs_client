@@ -40,7 +40,9 @@ class JobCard extends Component {
         }
     }
 
-
+    gotoAddJobCard = () => {
+        console.log(this.props.navigation.navigate('_____________________________', { screen: 'AddJobCard' }));
+    }
     render() {
         const { isPasswordShown, email, password, showSpinner } = this.state;
         return (
@@ -49,7 +51,7 @@ class JobCard extends Component {
 
                 <View style={styles.header}>
                     <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()} style={{marginTop:'5%',marginRight:'10%'}}>
-                        <Icon name="menu" />
+                        <Icon name="menu" style={{color:'#46a0b3'}} />
                     </TouchableOpacity>
                         <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
@@ -57,7 +59,7 @@ class JobCard extends Component {
                     <View style={styles.loginBody}>
                     <Text style={styles.bodyTitle}> WELCOME TO AVS</Text>
                        
-                        <TouchableOpacity onPress={() => console.log('goto add new meeting')} style={styles.myMeeting}>
+                        <TouchableOpacity onPress={() => this.gotoAddJobCard()} style={styles.myMeeting}>
                             <Text style={styles.myMeetingText}>Add New JOB CARD</Text>
                         </TouchableOpacity>
 

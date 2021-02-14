@@ -27,6 +27,7 @@ import JobCard from './JobCard';
 import AddMeeting from './AddMeeting';
 import Contact from './Contact';
 import About from './About';
+import AddJobCard from './AddJobCard';
 
 const Drawer = createDrawerNavigator();
 
@@ -36,7 +37,7 @@ const AppDrawer = () => {
       <Drawer.Navigator
         drawerContent={(props) => (<SideBar {...props} />)
         }
-        // initialRouteName="____________________________________"
+        // initialRouteName="_____________________________"
       >
         <Drawer.Screen
           name="Home"
@@ -85,7 +86,7 @@ const AppDrawer = () => {
           }}
         />
         <Drawer.Screen
-          name="____________________________________"
+          name="_____________________________"
           component={Root2}
           options={{
           }}
@@ -107,6 +108,7 @@ function Root2() {
       <Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />
       <Stack.Screen name="Register" options={{ headerShown: false }} component={Register} />
       <Stack.Screen name="AddMeeting" options={{ headerShown: false }} component={AddMeeting} />
+      <Stack.Screen name="AddJobCard" options={{ headerShown: false }} component={AddJobCard} />
     </Stack.Navigator>
   );
 }

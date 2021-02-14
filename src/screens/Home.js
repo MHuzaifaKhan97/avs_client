@@ -52,7 +52,7 @@ class Home extends Component {
 
                 <View style={styles.header}>
                     <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()} style={{marginTop:'5%',marginRight:'10%'}}>
-                        <Icon name="menu" />
+                        <Icon name="menu" style={{color:'#46a0b3'}} />
                     </TouchableOpacity>
                         <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
