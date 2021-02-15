@@ -15,7 +15,7 @@ class AddMeeting extends Component {
         represenativeDesignation: '',
         represenativeContact: '',
         represenativeEmail: '',
-        location: 'Demo Location',
+        location: '',
         agenda: '',
         date: '',
         status: 'pending',
@@ -40,7 +40,6 @@ class AddMeeting extends Component {
         });
     }
     addMeeting = () => {
-        // console.log(this.state.authUser);
 
         const { title,
             customer,
@@ -166,25 +165,10 @@ class AddMeeting extends Component {
                             <Label style={{ color: '#46a0b3', fontSize: 14 }}>Enter Representative Contact</Label>
                             <Input style={{ color: '#46a0b3', fontSize: 14 }} value={represenativeContact} keyboardType="number-pad" maxLength={11} onChangeText={(text) => this.setState({ represenativeContact: text })} />
                         </Item>
-                        <TouchableOpacity style={{
-                            backgroundColor: '#46a0b3',
-                            width: '100%',
-                            // alignItems: 'center',
-                            marginTop: '4%',
-                            marginBottom: '4%',
-                            paddingTop: 10,
-                            paddingBottom: 10,
-                            borderRadius: 5
-                        }}
-                            onPress={this.getlocation}
-                        >
-                            <View style={{ flexDirection: 'row' }}>
-                                <MyIcon name="location-arrow" color='#fff' size={15} style={{ paddingLeft: 10, marginTop: 3 }} />
-                                <Text style={{ marginLeft: 8, color: '#fff', fontSize: 15, fontWeight: '700' }}>
-                                    Select Location
-                                    </Text>
-                            </View>
-                        </TouchableOpacity>
+                        <Item floatingLabel style={{ marginTop: 4 }}>
+                            <Label style={{ color: '#46a0b3', fontSize: 14 }}>Enter Meeting Location</Label>
+                            <Input style={{ color: '#46a0b3', fontSize: 14 }} value={location} maxLength={50} onChangeText={(text) => this.setState({ location: text })} />
+                        </Item>
 
                         <Textarea bordered style={{ borderRadius: 5, color: '#46a0b3', width: '100%', fontSize: 14 }} placeholderTextColor="#46a0b3" value={agenda} onChangeText={(text) => this.setState({ agenda: text })} rowSpan={2} placeholder="Enter Meeting Agenda" />
 

@@ -46,9 +46,9 @@ function SideBar({ progress, ...props }) {
                 database().ref('users').once('value', (data) => {
                     for (var key in data.val()) {
                         if (data.val()[key].email.toLowerCase() === user.email.toLowerCase()) {
-                            setTimeout(() => {
+                            // setTimeout(() => {
                                 setAuthUser(data.val()[key])
-                            }, 1200);
+                            // }, 1200);
                         }
                     }
                 })
@@ -73,7 +73,7 @@ function SideBar({ progress, ...props }) {
                 <ListItem thumbnail>
                     <Left>
                         <Thumbnail source={{
-                            uri: authUser ? authUser.photoURL : 'https://attiehandassociates.co.za/wp-content/uploads/2014/08/Profile-Pic-Demo.png'
+                            uri: authUser.photoURL ? authUser.photoURL : 'https://attiehandassociates.co.za/wp-content/uploads/2014/08/Profile-Pic-Demo.png'
                         }} />
                     </Left>
                     <Body>

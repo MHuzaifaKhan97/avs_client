@@ -13,12 +13,41 @@ class PendingJobCards extends Component {
         password: '',
         showSpinner: false,
         socialLoggedIn: false,
-        meetingInfo: [],
-        authUser: {},
+        jobCardInfo: [],
     }
-   
+    
+    componentDidMount() {
+        const { jobCardInfo } = this.state;
+        this.setState({
+            showSpinner: true
+        })
+        auth().onAuthStateChanged((user) => {
+            database().ref('jobcards').once('value', (data) => {
+                let arr = [];
+
+                setTimeout(() => {
+                    for (var key in data.val()) {
+                        if (user.email.toLowerCase() === data.val()[key].meetingAddedBy.toLowerCase()) {
+                            arr.push(data.val()[key]);
+                        }
+                    }
+                    this.setState({
+                        jobCardInfo: arr,
+                    })
+                    this.setState({
+                        showSpinner: false
+                    })
+                }, 2000);
+
+            })
+
+        })
+    }
+
+
+
     render() {
-        const { isPasswordShown, email, password, showSpinner } = this.state;
+        const { isPasswordShown, email, password, showSpinner,jobCardInfo } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
@@ -34,25 +63,38 @@ class PendingJobCards extends Component {
 
                         <Text style={styles.bodyTitle}> MY PENDING JOBCARDS</Text>
 
-                        <TouchableOpacity>
-                            ABC
-                        </TouchableOpacity>
+                    
                         <ScrollView style={{ width: '100%', height: '85%' }}>
-
-                            <TouchableOpacity style={styles.meetings}>
-                                <Text style={styles.meetingsTitle}>JobCard Title</Text>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>demoemail@avs.com</Text>
-                                    <Text style={styles.meetingsTitle}>Pending</Text>
+                        {
+                            !showSpinner ?
+                                !jobCardInfo ?
+                                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={{color:'#46a0b3',fontSize:22}}>No Meeting Added Yet</Text>
                                 </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.meetingsTitle}>Location</Text>
-                                    <Text style={styles.meetingsTitle}>13/04/2021</Text>
+                                :
+                                jobCardInfo.map((meeting) => {
+                                    return <TouchableOpacity key={meeting.id} style={styles.meetings}>
+                                        <Text style={styles.meetingsTitle}>{meeting.title}</Text>
+
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <Text style={styles.meetingsTitle}>{meeting.represenativeEmail}</Text>
+                                            <Text style={styles.meetingsTitle}>{meeting.status}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <Text style={styles.meetingsTitle}>{meeting.location}</Text>
+                                            <Text style={styles.meetingsTitle}>{meeting.date}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+
+                                })
+                                
+                                :
+                                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                    <Spinner color="#46a0b3" />
                                 </View>
-                            </TouchableOpacity>
-              
-                        </ScrollView>
+
+                        }
+                       </ScrollView>
 
                     </View>
                 </View>
