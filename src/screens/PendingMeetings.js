@@ -22,33 +22,30 @@ class PendingMeetings extends Component {
             showSpinner: true
         })
         auth().onAuthStateChanged((user) => {
-            database().ref('meetings').once('value', (data) => {
-                let arr = [];
+            if (user) {
+                database().ref('meetings').once('value', (data) => {
+                    let arr = [];
 
-                setTimeout(() => {
-                    for (var key in data.val()) {
-                        if (user.email.toLowerCase() === data.val()[key].meetingAddedBy.toLowerCase()) {
-                            arr.push(data.val()[key]);
+                    setTimeout(() => {
+                        for (var key in data.val()) {
+                            if (user.email.toLowerCase() === data.val()[key].meetingAddedBy.toLowerCase()) {
+                                arr.push(data.val()[key]);
+                            }
                         }
-                    }
-                    this.setState({
-                        meetingInfo: arr,
-                    })
-                    this.setState({
-                        showSpinner: false
-                    })
-                }, 2000);
+                        this.setState({
+                            meetingInfo: arr,
+                        })
+                        this.setState({
+                            showSpinner: false
+                        })
+                    }, 2000);
 
-            })
-
+                })
+            }
         })
     }
-
-
     render() {
         const { isPasswordShown, email, password, showSpinner, meetingInfo } = this.state;
-        console.log(meetingInfo)
-
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor="#fff" />
@@ -67,35 +64,35 @@ class PendingMeetings extends Component {
 
                         <ScrollView style={{ width: '100%', height: '85%' }}>
 
-                        {
-                            !showSpinner ?
-                                !meetingInfo ?
-                                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={{color:'#46a0b3',fontSize:22}}>No Meeting Added Yet</Text>
-                                </View>
-                                :
-                                meetingInfo.map((meeting) => {
-                                    return <TouchableOpacity key={meeting.id} style={styles.meetings}>
-                                        <Text style={styles.meetingsTitle}>{meeting.title}</Text>
-
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            <Text style={styles.meetingsTitle}>{meeting.represenativeEmail}</Text>
-                                            <Text style={styles.meetingsTitle}>{meeting.status}</Text>
+                            {
+                                !showSpinner ?
+                                    !meetingInfo ?
+                                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                            <Text style={{ color: '#46a0b3', fontSize: 22 }}>No Meeting Added Yet</Text>
                                         </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            <Text style={styles.meetingsTitle}>{meeting.location}</Text>
-                                            <Text style={styles.meetingsTitle}>{meeting.date}</Text>
-                                        </View>
-                                    </TouchableOpacity>
+                                        :
+                                        meetingInfo.map((meeting) => {
+                                            return <TouchableOpacity key={meeting.id} style={styles.meetings}>
+                                                <Text style={styles.meetingsTitle}>{meeting.title}</Text>
 
-                                })
-                                
-                                :
-                                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                    <Spinner color="#46a0b3" />
-                                </View>
+                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                    <Text style={styles.meetingsTitle}>{meeting.represenativeEmail}</Text>
+                                                    <Text style={styles.meetingsTitle}>{meeting.status}</Text>
+                                                </View>
+                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                    <Text style={styles.meetingsTitle}>{meeting.location}</Text>
+                                                    <Text style={styles.meetingsTitle}>{meeting.date}</Text>
+                                                </View>
+                                            </TouchableOpacity>
 
-                        }
+                                        })
+
+                                    :
+                                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                        <Spinner color="#46a0b3" />
+                                    </View>
+
+                            }
                         </ScrollView>
 
                     </View>
